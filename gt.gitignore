@@ -1,2 +1,4 @@
 /src/backend/node_modules/
 /src/frontend/node_modules/
+/App-InventoryMg/src/frontend/node_modules
+/App-InventoryMg/src/backend/node_modules/
