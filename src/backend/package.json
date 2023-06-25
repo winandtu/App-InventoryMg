@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "creating and configuring requests and the application database",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/winandtu/App-InventoryMg.git"
+  },
+  "keywords": [
+    "inventory",
+    "managament"
+  ],
+  "author": "Danilo Arevalo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/winandtu/App-InventoryMg/issues"
+  },
+  "homepage": "https://github.com/winandtu/App-InventoryMg#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.11.0",
+    "sequelize": "^6.32.1"
+  }
+}
