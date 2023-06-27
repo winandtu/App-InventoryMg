@@ -1,20 +1,20 @@
 // pointController.js
 
 const Point = require('../models/points');
+//const User = require('../models/user');
 
 // Controlador para crear un nuevo punto
 exports.createPoint = async (req, res) => {
   try {
     // Obtén los datos del punto del cuerpo de la solicitud
     const { name, longitude, latitude, comments, userId } = req.body;
-
     // Crea un nuevo punto en la base de datos utilizando el modelo de punto
     const newPoint = await Point.create({
       name,
       longitude,
       latitude,
       comments,
-      userId
+      userId,
     });
 
     // Devuelve una respuesta exitosa con el punto creado

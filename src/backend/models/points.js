@@ -30,6 +30,16 @@ const Point = sequelize.define('Point', {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
   },
+
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    validate: {
+      notNull: { 
+        msg: 'El ID de usuario es obligatorio'
+      },
+    },
+  },
 });
 
 Point.belongsTo(User, { foreignKey: 'userId' });
