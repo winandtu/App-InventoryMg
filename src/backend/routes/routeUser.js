@@ -14,7 +14,7 @@ router.post('/create', userController.createUser);
 router.get('/', userController.getUsers);
 
 // Ruta para obtener un dato por su ID
-router.get('idUsr/:id', userController.getUserById);
+router.get('/idUsr/:id', userController.getUserById);
 
 // Ruta para actualizar un dato por su ID
 router.put('/:id', authMiddleware.authenticateUser,userController.updateUser);
