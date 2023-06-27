@@ -1,8 +1,7 @@
 // userController.js
 
-//const express = require('express');
-//const bodyParser = require('body-parser');
-// Importa el modelo de usuario
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
 const sequelize = require('../config/database'); // Importa sequelize
 
@@ -17,7 +16,7 @@ exports.createUser = async (req, res) => {
     const newUser = await User.create({
       name,
       username,
-      password,
+      password: await bcrypt.hash(password, 10), // Encripta la contraseña antes de almacenarla
       role
     });
 
@@ -115,5 +114,39 @@ exports.deleteUser = async (req, res) => {
     // Si ocurre un error, devuelve una respuesta de error
     console.log(error);
     res.status(500).json({ error: 'Error al eliminar el usuario' });
+  }
+};
+
+// Controlador para iniciar sesión
+exports.loginUser = async (req, res) => {
+  try {
+    // Obtén los datos del usuario del cuerpo de la solicitud
+    const { username, password } = req.body;
+
+    // Busca al usuario en la base de datos por su nombre de usuario
+    const user = await User.findOne({ where: { username } });
+
+    // Si el usuario no existe, devuelve una respuesta de error
+    if (!user) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    // Compara la contraseña ingresada con la contraseña almacenada en la base de datos
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    // Si las contraseñas no coinciden, devuelve una respuesta de error
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Contraseña incorrecta' });
+    }
+
+    // Genera un token JWT con el ID del usuario y una clave secreta
+    const token = jwt.sign({ id: user.id }, 'secreto');
+
+    // Devuelve una respuesta exitosa con el token JWT
+    res.status(200).json({ token, message: 'Inicio de sesión exitoso' } );
+  } catch (error) {
+    // Si ocurre un error, devuelve una respuesta de error
+    console.error(error);
+    res.status(500).json({ error: 'Error al iniciar sesión' });
   }
 };
