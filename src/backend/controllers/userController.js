@@ -139,14 +139,38 @@ exports.loginUser = async (req, res) => {
       return res.status(401).json({ error: 'Contraseña incorrecta' });
     }
 
-    // Genera un token JWT con el ID del usuario y una clave secreta
-    const token = jwt.sign({ id: user.id }, 'secreto');
+    // Genera un token JWT con el ID del usuario y el rol
+    const token = jwt.sign({ id: user.id, role: user.role }, 'secreto');
+    console.log(token);
+    console.log(user.role);
 
     // Devuelve una respuesta exitosa con el token JWT
-    res.status(200).json({ token, message: 'Inicio de sesión exitoso' } );
+    res.status(200).json({ token, message: 'Inicio de sesión exitoso' });
   } catch (error) {
     // Si ocurre un error, devuelve una respuesta de error
     console.error(error);
     res.status(500).json({ error: 'Error al iniciar sesión' });
+  }
+};
+
+
+// Controlador para obtener información de los operarios
+exports.getOperarios = async (req, res) => {
+  try {
+    // Verifica si el usuario es un admin
+    if (req.user.role === 'admin') {
+      console.log(req.user.role);
+      // El rol admin puede ver toda la información de los operarios
+      const operarios = await User.findAll({ where: { role: 'operario' } });
+      res.status(200).json(operarios);
+    } else {
+      // El usuario no es un admin
+      // Obtén la información del usuario autenticado directamente desde req.user.id
+      const usuarioActual = await User.findByPk(req.user.id);
+      res.status(200).json(usuarioActual);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Error al obtener la información de los operarios' });
   }
 };

@@ -9,8 +9,12 @@ exports.authenticateUser = (req, res, next) => {
     // Verifica y decodifica el token utilizando la clave secreta
     const decodedToken = jwt.verify(token, 'secreto');
 
-    // Agrega el ID del usuario al objeto de solicitud
-    req.user = { id: decodedToken.userId };
+    // Agrega el ID del usuario y el rol al objeto de solicitud
+    req.user = {
+      id: decodedToken.id,
+      role: decodedToken.role, // Asegúrate de tener el rol del usuario en el token decodificado
+    };
+    console.log('middleware',req.user); // Agrega esta línea para verificar req.user
 
     // Continúa con el siguiente middleware o controlador
     next();
