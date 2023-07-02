@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import jwtDecode from 'jwt-decode';
+import { Link } from 'react-router-dom';
 
-const Login = () => {
+function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,22 +32,27 @@ const Login = () => {
         // Verificar el rol del usuario y redirigir a la página correspondiente
         if (role === 'admin') {
           // Redirigir al dashboard del admin
-          //window.location.href = '/admin-dashboard';
           console.log('Es admin');
         } else if (role === 'operario') {
           // Redirigir al dashboard del operario
-          //window.location.href = '/operario-dashboard';
           console.log('Es Operario');
         } else {
           // Redirigir a una página de acceso no autorizado o mostrar un mensaje de error
-          //window.location.href = '/unauthorized';
           console.log('No autorizado');
         }
+
+        setError(null);
       } else {
-        // Mostrar mensaje de error en caso de respuesta no exitosa
-        console.error('Error al iniciar sesión');
+        if (response.status === 404) {
+          setError('Usuario no existe, debe registrarse primero');
+        } else if (response.status === 401) {
+          setError('Contraseña incorrecta');
+        } else {
+          setError('Usuario o contraseña incorrectos');
+        }
       }
     } catch (error) {
+      setError('Error en la solicitud');
       console.error('Error en la solicitud:', error);
     }
   };
@@ -74,8 +81,11 @@ const Login = () => {
         </div>
         <button type="submit">Iniciar sesión</button>
       </form>
+      {error && <p>{error}</p>} 
+      <Link to="/register">Registrate</Link>
+      <div><Link to="/map">Map</Link></div>
     </div>
   );
-};
+}
 
 export default Login;

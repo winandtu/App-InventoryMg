@@ -1,10 +1,5 @@
 //import db from '..models/modelIndex';
 const express = require('express');
-//const bodyParser = require('body-parser');
-//const sequelize = require('./config/database'); // Importa sequelize
-//const User = require('./models/user');
-//const Point = require('./models/points');
-//const pointImage = require('./models/pointImages');
 const routePoints = require('./routes/routePoints');
 const routeUsers = require('./routes/routeUser');
 const routeImages = require('./routes/routeImages');
