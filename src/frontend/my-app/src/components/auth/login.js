@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import jwtDecode from 'jwt-decode';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false); // Estado para controlar la autenticación
+  const [userRole, setUserRole] = useState(''); // Estado para almacenar el rol del usuario
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,23 +27,15 @@ function Login() {
         // Obtener el token de la respuesta
         const { token } = await response.json();
 
+        // Decidir qué hacer con el token (por ejemplo, almacenarlo en el estado o en las cookies)
+
+        setError(null);
+        setLoggedIn(true); // Marcar al usuario como autenticado
+
         // Decodificar el token para obtener el rol del usuario
         const decodedToken = jwtDecode(token);
         const { role } = decodedToken;
-
-        // Verificar el rol del usuario y redirigir a la página correspondiente
-        if (role === 'admin') {
-          // Redirigir al dashboard del admin
-          console.log('Es admin');
-        } else if (role === 'operario') {
-          // Redirigir al dashboard del operario
-          console.log('Es Operario');
-        } else {
-          // Redirigir a una página de acceso no autorizado o mostrar un mensaje de error
-          console.log('No autorizado');
-        }
-
-        setError(null);
+        setUserRole(role); // Almacenar el rol en el estado
       } else {
         if (response.status === 404) {
           setError('Usuario no existe, debe registrarse primero');
@@ -57,6 +51,16 @@ function Login() {
     }
   };
 
+  if (loggedIn) {
+    if (userRole === 'admin') {
+      return <Navigate to="/admin" />; // Redirigir a la página del admin si está autenticado como admin
+    } else if (userRole === 'operario') {
+      return <Navigate to="/operario" />; // Redirigir a la página del operario si está autenticado como operario
+    } else {
+      return <p>No autorizado</p>; // Mostrar mensaje de no autorizado si el rol no está definido correctamente
+    }
+  }
+
   return (
     <div>
       <h1>Iniciar sesión</h1>
@@ -68,6 +72,7 @@ function Login() {
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -77,6 +82,7 @@ function Login() {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
         <button type="submit">Iniciar sesión</button>

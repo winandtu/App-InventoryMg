@@ -5,10 +5,10 @@ const RegisterUsr = () => {
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('');
-  const [error, setError] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  //const [role, setRole] = useState('');
+  //const [error, setError] = useState(false);
+  //const [successMessage, setSuccessMessage] = useState('');
+  //const [errorMessage, setErrorMessage] = useState('');
 
 
   const handleSubmit = async (e) => {
@@ -21,31 +21,31 @@ const RegisterUsr = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, username, password, role }),
+        body: JSON.stringify({ name, username, password, role:'operario' }),
       });
 
       // Verificar si la respuesta fue exitosa
       if (response.ok) {
         // Mostrar un mensaje de éxito o redirigir a la página de inicio de sesión
-        setSuccessMessage(() => 'Registro exitoso');
-        setErrorMessage(() => '');
-        console.log('Usuario creado con éxito');
+        alert('Operario registrado correctamente');
+        setName('');
+        setUsername('');
+        setPassword('');
       } else {
         // Mostrar un mensaje de error en caso de respuesta no exitosa
-        setError(true);
+        const error = await response.json();
+        alert(`Error al registrar el operario: ${error.error}`);
         console.error('Error al crear el usuario');
       }
     } catch (error) {
       //setError(true);
-      setSuccessMessage(() => '');
-      setErrorMessage(() => 'Error en la solicitud');
       console.error('Error en la solicitud:', error);
     }
   };
 
   return (
     <div>
-      <h1>Registro de usuario</h1>
+      <h1>Registro de Operario</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Nombre:</label>
@@ -54,6 +54,7 @@ const RegisterUsr = () => {
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -63,6 +64,7 @@ const RegisterUsr = () => {
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </div>
         <div>
@@ -72,25 +74,12 @@ const RegisterUsr = () => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
-        </div>
-        <div>
-          <label htmlFor="role">Rol:</label>
-          <select
-            id="role"
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-          >
-            <option value="">Seleccionar rol</option>
-            <option value="admin">Admin</option>
-            <option value="operario">Operario</option>
-          </select>
         </div>
         <button type="submit">Registrar</button>
       </form>
-      {error && <p>Error al crear el usuario</p>}
-      {error && <p>{errorMessage}</p>}
-      {successMessage && <p>{successMessage}</p>}
+
       <Link to="/login">Volver al inicio de sesión</Link>
     </div>
   );
