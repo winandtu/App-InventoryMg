@@ -7,7 +7,7 @@ const authMiddleware = require('../middlewares/authMiddleware');
 //PUNTO CRUD:
 
 // Ruta para crear
-router.post('/create', authMiddleware.authenticateUser,pointController.createPoint);
+router.post('/create',pointController.createPoint);
 
 // Ruta para obtener todos los puntos en el mapa
 router.get('/',pointController.getPoints);

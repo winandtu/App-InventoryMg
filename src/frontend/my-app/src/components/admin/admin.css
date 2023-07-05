@@ -1,0 +1,45 @@
+body {
+  background-color: rgb(17, 17, 17);
+  color: rgb(255, 226, 189);
+}
+
+.container {
+  border: 1px solid white;
+  padding: 10px;
+}
+
+.panel-container {
+  display: flex;
+}
+
+.panel-left {
+  width: 50%;
+}
+
+.panel-right {
+  width: 50%;
+  background-color: rgba(0, 0, 0, 0)
+  
+}
+
+.table-container {
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: rgb(0, 0, 0);
+}
+
+.logout-button {
+  margin-top: 20px;
+  color: rgb(255, 226, 189);
+  background-color: red;
+}
+
+.map-box{
+  padding: 20px;
+  border: 1px solid white;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  background-color: rgb(0, 0, 0);
+}

@@ -4,6 +4,7 @@ import RegisterUsr from './components/auth/register';
 import Map from './components/maps/map';
 import Admin from './components/admin/admin';
 import Operario from './components/operario/operario';
+import PointRegister from './components/points/point';
 //import adminDashboard from './components/admin/admin';
 import './App.css';
 
@@ -19,6 +20,7 @@ function App() {
         <Route path="/map" element={<Map />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/operario" element={<Operario />} />
+        <Route path="/point" element={<PointRegister />} />
         
        
 

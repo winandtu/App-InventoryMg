@@ -45,10 +45,10 @@ const RegisterUsr = () => {
 
   return (
     <div>
-      <h1>Registro de Operario</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Nombre:</label>
+          <br />
           <input
             type="text"
             id="name"
@@ -59,6 +59,7 @@ const RegisterUsr = () => {
         </div>
         <div>
           <label htmlFor="username">Nombre de usuario:</label>
+          <br />
           <input
             type="text"
             id="username"
@@ -69,6 +70,7 @@ const RegisterUsr = () => {
         </div>
         <div>
           <label htmlFor="password">Contraseña:</label>
+          <br />
           <input
             type="password"
             id="password"

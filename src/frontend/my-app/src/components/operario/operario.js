@@ -19,7 +19,7 @@ const Operario = () => {
           const response = await axios.get('users/operarios');
           setOperario(response.data);
         } else {
-          // Si el token no existe, redirige al usuario a la página de inicio de sesión
+          // Si el token no existe, redirige al usuario a la página de inicio de sesión 
           // o muestra un mensaje de error
           console.error('Token no encontrado');
         }
