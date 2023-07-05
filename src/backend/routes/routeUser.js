@@ -4,6 +4,8 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 const authMiddleware = require('../middlewares/authMiddleware');
+//const operarioMiddleware = require('../middlewares/operarioMiddleware');
+const authMiddleware2 = require('../middlewares/operarioMiddleware');
 
 
 //USUARIO CRUD:
@@ -24,9 +26,8 @@ router.delete('/:id', authMiddleware.authenticateUser,userController.deleteUser)
 //ruta para login
 router.post('/login', userController.loginUser);
 // Ruta para obtener información de los operarios
-router.get('/operarios', authMiddleware.authenticateUser, userController.getOperarios);
+router.get('/operarios', authMiddleware2, userController.getOperarios);
 
 
 
 module.exports = router;
-

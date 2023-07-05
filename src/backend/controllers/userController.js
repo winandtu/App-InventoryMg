@@ -157,20 +157,30 @@ exports.loginUser = async (req, res) => {
 // Controlador para obtener información de los operarios
 exports.getOperarios = async (req, res) => {
   try {
-    // Verifica si el usuario es un admin
-    if (req.user.role === 'admin') {
-      console.log(req.user.role);
-      // El rol admin puede ver toda la información de los operarios
-      const operarios = await User.findAll({ where: { role: 'operario' } });
-      res.status(200).json(operarios);
-    } else {
-      // El usuario no es un admin
-      // Obtén la información del usuario autenticado directamente desde req.user.id
-      const usuarioActual = await User.findByPk(req.user.id);
-      res.status(200).json(usuarioActual);
+    // Verifica si se proporcionó un token en el encabezado de la solicitud
+    const authHeader = req.header('Authorization');
+    if (!authHeader) {
+      return res.status(401).json({ error: 'No se proporcionó un token de autenticación' });
     }
+
+    const token = authHeader.split(' ')[1]; // Se asume que el encabezado de autorización tiene el formato 'Bearer {token}'
+
+    // Verifica y decodifica el token
+    const decodedToken = jwt.verify(token, 'secreto'); // Reemplaza 'secretKey' con tu clave secreta
+
+    // Verifica si el usuario existe en la base de datos
+    const usuarioActual = await User.findByPk(decodedToken.id);
+    if (!usuarioActual) {
+      return res.status(404).json({ error: 'Usuario no encontrado' });
+    }
+
+    // Si se pasaron todas las verificaciones, retorna la información del usuario
+    res.status(200).json(usuarioActual);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Error al obtener la información de los operarios' });
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(401).json({ error: 'Token inválido' });
+    }
+    res.status(500).json({ error: 'Error al obtener la información del operario' });
   }
 };
