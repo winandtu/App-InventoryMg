@@ -3,6 +3,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const Point = require('../models/points');
 const sequelize = require('../config/database'); // Importa sequelize
 
 
@@ -170,12 +171,59 @@ exports.getOperarios = async (req, res) => {
 
     // Verifica si el usuario existe en la base de datos
     const usuarioActual = await User.findByPk(decodedToken.id);
+    console.log('usuario actual es: ',usuarioActual.get('id')); //da el id usuario
+    const puntos = await Point.findAll({
+      where: { userId: usuarioActual.get('id') },
+      include: [{ model: User }]
+    });
+    
+    console.log('puntos encontrados: ', puntos);
     if (!usuarioActual) {
       return res.status(404).json({ error: 'Usuario no encontrado' });
     }
 
     // Si se pasaron todas las verificaciones, retorna la información del usuario
     res.status(200).json(usuarioActual);
+  } catch (error) {
+    console.error(error);
+    if (error.name === 'JsonWebTokenError') {
+      return res.status(401).json({ error: 'Token inválido' });
+    }
+    res.status(500).json({ error: 'Error al obtener la información del operario' });
+  }
+};
+
+
+exports.getPointsOperario = async (req, res) => {
+  try {
+    // Verifica si se proporcionó un token en el encabezado de la solicitud
+    const authHeader = req.header('Authorization');
+    if (!authHeader) {
+      return res.status(401).json({ error: 'No se proporcionó un token de autenticación' });
+    }
+
+    const token = authHeader.split(' ')[1]; // Se asume que el encabezado de autorización tiene el formato 'Bearer {token}'
+
+    // Verifica y decodifica el token
+    const decodedToken = jwt.verify(token, 'secreto'); // Reemplaza 'secretKey' con tu clave secreta
+
+    // Verifica si el usuario existe en la base de datos
+    const usuarioActual = await User.findByPk(decodedToken.id);
+    console.log('usuario actual es: ',usuarioActual.get('id')); //da el id usuario
+
+    //hace el join entre id del usuario y el id del usuario en la tabla points
+    const puntos = await Point.findAll({
+      where: { userId: usuarioActual.get('id') },
+      include: [{ model: User, attributes: [] }]
+    });
+    
+    console.log('puntos encontrados: ', puntos);
+    if (!puntos) {
+      return res.status(404).json({ error: 'El usuario no tiene puntos' });
+    }
+
+    // Si se pasaron todas las verificaciones, retorna la información del usuario
+    res.status(200).json(puntos);
   } catch (error) {
     console.error(error);
     if (error.name === 'JsonWebTokenError') {

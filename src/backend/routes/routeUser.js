@@ -28,6 +28,9 @@ router.post('/login', userController.loginUser);
 // Ruta para obtener información de los operarios
 router.get('/operarios', authMiddleware2, userController.getOperarios);
 
+// Ruta para obtener información de los puntos del operario
+router.get('/pointsOperario', authMiddleware2, userController.getPointsOperario);
+
 
 
 module.exports = router;

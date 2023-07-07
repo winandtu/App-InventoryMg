@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Operario = () => {
   const [operario, setOperario] = useState(null);
@@ -39,7 +40,9 @@ const Operario = () => {
           <p>Nombre: {operario.name}</p>
           <p>Username: {operario.username}</p>
           <p>id: {operario.id}</p>
+          <Link to="/pointsOp">Puntos del operario</Link>
         </div>
+        
       ) : (
         <p>Cargando operario...</p>
       )}
