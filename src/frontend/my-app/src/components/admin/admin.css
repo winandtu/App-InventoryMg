@@ -10,10 +10,12 @@ body {
 
 .panel-container {
   display: flex;
+  background-color: rgb(17, 17, 17);
 }
 
 .panel-left {
   width: 50%;
+  
 }
 
 .panel-right {

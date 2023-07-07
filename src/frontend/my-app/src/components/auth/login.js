@@ -61,7 +61,7 @@ function Login() {
 
   if (loggedIn) {
     if (userRole === 'admin') {
-      return <Navigate to="/admin" />;
+      return <Navigate to="/dashboardAdmin" />;
     } else if (userRole === 'operario') {
       return <Navigate to="/operario" />;
     } else {

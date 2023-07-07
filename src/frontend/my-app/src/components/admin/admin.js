@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import RegisterUsr from '../auth/register';
 import './admin.css'; // Importar el archivo CSS
 import PointRegister from '../points/point';
+import Map from '../maps/map';
 
 function Admin() {
   const [operarios, setOperarios] = useState([]);
@@ -61,27 +62,48 @@ function Admin() {
 
   return (
     <div>
-      <h1>Panel de Administrador</h1>
+      <h1>INFORMACIÓN</h1>
       <div className="panel-container">
         <div className="panel-left">
           <div className="container">
-            <h1>Registrar Operario</h1>
-            <RegisterUsr />
+            <h1>Puntos Recolectados</h1>
+            <div className="table-container">
+              <table>
+                <thead>
+                  <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Operario</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+            <tbody>
+              {puntosRecolectados.map((punto, index) => (
+                <tr key={punto.id}>
+                  <td>{index + 1}</td>
+                  <td>{punto.name}</td>
+                  <td>{punto.userId}</td>
+                  <td>{punto.create_date}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+            </div>
+            
           </div>
 
           <div className="container">
-            <h1>Registrar Punto de Recolección</h1>
-            <PointRegister />
-            <h1>Mapa de puntos recolectados</h1>
+          <h1>mirar que colocar</h1>
         <div className='map-box'>
-          <Link to="/map">VER MAPA</Link>
+        <h1>Aquí también</h1>
         </div>
           </div>
         </div>
         <div className="panel-right">
+          <div className="container">
+          <h1>Información de Operarios</h1>
           <div className="table-container">
             <table>
-              <caption>Información de Operarios</caption>
               <thead>
                 <tr>
                   <th>#</th>
@@ -102,30 +124,9 @@ function Admin() {
               </tbody>
             </table>
           </div>
-          <h2>Puntos Recolectados</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Operario</th>
-                <th>Fecha</th>
-              </tr>
-            </thead>
-            <tbody>
-              {puntosRecolectados.map((punto, index) => (
-                <tr key={punto.id}>
-                  <td>{index + 1}</td>
-                  <td>{punto.name}</td>
-                  <td>{punto.userId}</td>
-                  <td>{punto.create_date}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          </div>
         </div>
       </div>
-      <button className="logout-button">Cerrar Sesión</button>
     </div>
   );
 }

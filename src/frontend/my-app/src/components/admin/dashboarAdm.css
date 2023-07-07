@@ -1,0 +1,113 @@
+/* Estilos generales */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: rgb(17, 17, 17);
+  }
+  
+  .container {
+    background-color: rgb(17, 17, 17);
+    border: 1px solid #fff;
+    border-radius: 5px;
+    display: flex;
+  }
+  
+  .sidebar {
+    background-color: #000;
+    color: #fff;
+    width: 200px;
+  }
+  
+  .content {
+    flex-grow: 1;
+    padding: 20px;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos del menú de la sidebar */
+  
+  .menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+  }
+  
+  .menu li {
+    margin-bottom: 10px;
+  }
+  
+  .menu li a {
+    display: block;
+    padding: 10px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+  }
+  
+  .menu li a:hover {
+    background-color: #333;
+  }
+  
+  /* Estilos de los componentes */
+  
+  .register-operator {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .register-collection-points {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .view-customers {
+    background-color: #686868;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .view-collection-points {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .view-map {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .logout-button {
+     
+    color: rgb(255, 255, 255);
+    background-color: red;
+    
+  }
+
+  .sidebar-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background-color: rgb(0, 0, 0);
+  }
