@@ -6,6 +6,7 @@ import Admin from './components/admin/admin';
 import Operario from './components/operario/operario';
 import PointRegister from './components/points/point';
 import PointsOp from './components/operario/pointsOp';
+import PointRegisterOp from './components/points/pointRegisterOp';
 //import adminDashboard from './components/admin/admin';
 import './App.css';
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/operario" element={<Operario />} />
         <Route path="/point" element={<PointRegister />} />
         <Route path="/pointsOp" element={<PointsOp />} />
+        <Route path="/pointRegisterOp" element={<PointRegisterOp />} />
         
        
 

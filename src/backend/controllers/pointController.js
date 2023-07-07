@@ -1,7 +1,8 @@
 // pointController.js
 
 const Point = require('../models/points');
-//const User = require('../models/user');
+const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
 // Controlador para crear un nuevo punto
 exports.createPoint = async (req, res) => {
@@ -63,11 +64,6 @@ exports.getPointUsr = async (req, res) => {
     res.status(500).json({ error: 'Error al obtener los puntos' });
   }
 };
-
-
-
-
-
 
 
 // Controlador para obtener un punto por su ID
@@ -142,5 +138,44 @@ exports.deletePoint = async (req, res) => {
     // Si ocurre un error, devuelve una respuesta de error
     console.error(error);
     res.status(500).json({ error: 'Error al eliminar el punto' });
+  }
+};
+
+
+// Controlador para crear un nuevo punto
+exports.createPointOp = async (req, res) => {
+  try {
+
+    // Verifica si se proporcionó un token en el encabezado de la solicitud
+    const authHeader = req.header('Authorization');
+    if (!authHeader) {
+      return res.status(401).json({ error: 'No se proporcionó un token de autenticación' });
+    }
+
+    const token = authHeader.split(' ')[1]; // Se asume que el encabezado de autorización tiene el formato 'Bearer {token}'
+
+    // Verifica y decodifica el token
+    const decodedToken = jwt.verify(token, 'secreto'); // Reemplaza 'secretKey' con tu clave secreta
+
+    // Verifica si el usuario existe en la base de datos
+    const usuarioActual = await User.findByPk(decodedToken.id);
+    console.log('usuario actual es: ',usuarioActual.get('id')); 
+    // Obtén los datos del punto del cuerpo de la solicitud
+    const { name, longitude, latitude, comments } = req.body;
+    // Crea un nuevo punto en la base de datos utilizando el modelo de punto
+    const newPoint = await Point.create({
+      name,
+      longitude,
+      latitude,
+      comments,
+      userId: usuarioActual.get('id'),
+    });
+
+    // Devuelve una respuesta exitosa con el punto creado
+    res.status(201).json(newPoint);
+  } catch (error) {
+    // Si ocurre un error, devuelve una respuesta de error
+    console.error(error);
+    res.status(500).json({ error: 'Error al crear el punto' });
   }
 };

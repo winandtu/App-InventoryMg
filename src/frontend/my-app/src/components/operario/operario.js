@@ -41,6 +41,7 @@ const Operario = () => {
           <p>Username: {operario.username}</p>
           <p>id: {operario.id}</p>
           <Link to="/pointsOp">Puntos del operario</Link>
+          <Link to="/pointRegisterOp">Registrar Puntos</Link>
         </div>
         
       ) : (
