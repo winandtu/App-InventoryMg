@@ -70,6 +70,7 @@ function Login() {
   }
 
   return (
+    <div><h1 style={{ color: "red", fontSize: "50px", textAlign: "center" , paddingTop: "10px"}}>Inventory Management</h1>
     <div className="login-container">
       <div className="login-box">
         <h1>Iniciar sesión</h1>
@@ -104,6 +105,7 @@ function Login() {
       <div className="map-box">
         <Link to="/map">Map</Link>
       </div>
+    </div>
     </div>
   );
 }
