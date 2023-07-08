@@ -63,7 +63,7 @@ function Login() {
     if (userRole === 'admin') {
       return <Navigate to="/dashboardAdmin" />;
     } else if (userRole === 'operario') {
-      return <Navigate to="/operario" />;
+      return <Navigate to="/dashboardOP" />;
     } else {
       return <p>No autorizado</p>;
     }

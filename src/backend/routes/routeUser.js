@@ -19,10 +19,10 @@ router.get('/', userController.getUsers);
 router.get('/idUsr/:id', userController.getUserById);
 
 // Ruta para actualizar un dato por su ID
-router.put('/:id', authMiddleware.authenticateUser,userController.updateUser);
+router.put('/:id', authMiddleware.authenticateUser, userController.updateUser);
 
 // Ruta para eliminar un dato por su ID
-router.delete('/:id', authMiddleware.authenticateUser,userController.deleteUser);
+router.delete('/:id', authMiddleware.authenticateUser, userController.deleteUser);
 //ruta para login
 router.post('/login', userController.loginUser);
 // Ruta para obtener información de los operarios

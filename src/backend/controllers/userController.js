@@ -171,12 +171,12 @@ exports.getOperarios = async (req, res) => {
 
     // Verifica si el usuario existe en la base de datos
     const usuarioActual = await User.findByPk(decodedToken.id);
-    console.log('usuario actual es: ',usuarioActual.get('id')); //da el id usuario
+    console.log('usuario actual es: ', usuarioActual.get('id')); //da el id usuario
     const puntos = await Point.findAll({
       where: { userId: usuarioActual.get('id') },
       include: [{ model: User }]
     });
-    
+
     console.log('puntos encontrados: ', puntos);
     if (!usuarioActual) {
       return res.status(404).json({ error: 'Usuario no encontrado' });
@@ -209,14 +209,14 @@ exports.getPointsOperario = async (req, res) => {
 
     // Verifica si el usuario existe en la base de datos
     const usuarioActual = await User.findByPk(decodedToken.id);
-    console.log('usuario actual es: ',usuarioActual.get('id')); //da el id usuario
+    console.log('usuario actual es: ', usuarioActual.get('id')); //da el id usuario
 
     //hace el join entre id del usuario y el id del usuario en la tabla points
     const puntos = await Point.findAll({
       where: { userId: usuarioActual.get('id') },
       include: [{ model: User, attributes: [] }]
     });
-    
+
     console.log('puntos encontrados: ', puntos);
     if (!puntos) {
       return res.status(404).json({ error: 'El usuario no tiene puntos' });

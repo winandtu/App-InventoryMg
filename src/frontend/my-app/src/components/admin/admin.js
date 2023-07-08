@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import RegisterUsr from '../auth/register';
 import './admin.css'; // Importar el archivo CSS
-import PointRegister from '../points/point';
-import Map from '../maps/map';
+
 
 function Admin() {
   const [operarios, setOperarios] = useState([]);
@@ -71,59 +68,65 @@ function Admin() {
               <table>
                 <thead>
                   <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Operario</th>
-                <th>Fecha</th>
-              </tr>
-            </thead>
-            <tbody>
-              {puntosRecolectados.map((punto, index) => (
-                <tr key={punto.id}>
-                  <td>{index + 1}</td>
-                  <td>{punto.name}</td>
-                  <td>{punto.userId}</td>
-                  <td>{punto.create_date}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Operario</th>
+                    <th>Fecha</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {puntosRecolectados.map((punto, index) => (
+                    <tr key={punto.id}>
+                      <td>{index + 1}</td>
+                      <td>{punto.name}</td>
+                      <td>{punto.userId}</td>
+                      <td>{punto.create_date}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-            
+
           </div>
 
           <div className="container">
-          <h1>mirar que colocar</h1>
-        <div className='map-box'>
-        <h1>Aquí también</h1>
-        </div>
+            <h1>Comentarios &nbsp;&nbsp;&nbsp;</h1>
+            <div className='map-box'>
+              {puntosRecolectados.map((punto, index) => (
+                <tr key={punto.id}>
+
+                  <td>{punto.name}&nbsp;&nbsp;&nbsp;</td>
+                  <td>{punto.comments}</td>
+                </tr>
+              ))}
+            </div>
           </div>
         </div>
         <div className="panel-right">
           <div className="container">
-          <h1>Información de Operarios</h1>
-          <div className="table-container">
-            <table>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Nombre</th>
-                  <th>username</th>
-                  <th>ID</th>
-                </tr>
-              </thead>
-              <tbody>
-                {operarios.map((operario, index) => (
-                  <tr key={operario.id}>
-                    <td>{index + 1}</td>
-                    <td>{operario.name}</td>
-                    <td>{operario.username}</td>
-                    <td>{operario.id}</td>
+            <h1>Información de Operarios</h1>
+            <div className="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>username</th>
+                    <th>ID</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {operarios.map((operario, index) => (
+                    <tr key={operario.id}>
+                      <td>{index + 1}</td>
+                      <td>&nbsp;&nbsp;&nbsp;{operario.name}&nbsp;&nbsp;&nbsp;</td>
+                      <td>{operario.username}&nbsp;&nbsp;&nbsp;</td>
+                      <td>{operario.id}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './admin.css'; // Importar el archivo CSS
-import './dashboarAdm.css'; // Importar el archivo CSS
-import Admin from './admin';
+import './operario.css'; // Importar el archivo CSS
+import './dashboardOp.css'; // Importar el archivo CSS
+import Operario from '../operario/operario';
 
-function DashboardAdmin() {
+
+function DashboardOperario() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -18,8 +19,7 @@ function DashboardAdmin() {
     <div className="container">
       <div className="sidebar">
         <ul className="menu">
-          <li><Link to="/register">Registrar Operario</Link></li>
-          <li><Link to="/point">Registrar Puntos de Recolección</Link></li>
+          <li><Link to="/pointRegisterOp">Registrar Puntos de Recolección</Link></li>
           <li><Link to="/map">Ver Mapa</Link></li>
           <div className="sidebar-footer">
             <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>
@@ -27,13 +27,13 @@ function DashboardAdmin() {
         </ul>
       </div>
       <div className="content">
-        <h1 className="title">PANEL DE ADMINISTRADOR</h1>
+        <h1 className="title">PANEL DE OPERARIO</h1>
         <div className="view-customers">
-          <Admin />
+          <Operario />
         </div>
       </div>
     </div>
   );
 }
 
-export default DashboardAdmin;
+export default DashboardOperario;

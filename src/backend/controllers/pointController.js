@@ -159,7 +159,7 @@ exports.createPointOp = async (req, res) => {
 
     // Verifica si el usuario existe en la base de datos
     const usuarioActual = await User.findByPk(decodedToken.id);
-    console.log('usuario actual es: ',usuarioActual.get('id')); 
+    console.log('usuario actual es: ', usuarioActual.get('id'));
     // Obtén los datos del punto del cuerpo de la solicitud
     const { name, longitude, latitude, comments } = req.body;
     // Crea un nuevo punto en la base de datos utilizando el modelo de punto

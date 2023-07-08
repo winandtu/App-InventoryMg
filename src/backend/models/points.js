@@ -1,5 +1,5 @@
 const { DataTypes, Model } = require('sequelize');
-const  sequelize  = require('../config/database');
+const sequelize = require('../config/database');
 
 
 const User = require('./user');
@@ -35,7 +35,7 @@ const Point = sequelize.define('Point', {
     type: DataTypes.INTEGER,
     allowNull: false,
     validate: {
-      notNull: { 
+      notNull: {
         msg: 'El ID de usuario es obligatorio'
       },
     },

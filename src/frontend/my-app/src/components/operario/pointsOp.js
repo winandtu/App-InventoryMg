@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './operario.css'; // Importar el archivo CSS
+
 
 const PointsOp = () => {
   const [points, setPoints] = useState([]);
@@ -28,13 +30,32 @@ const PointsOp = () => {
       {points.length > 0 ? (
         <div>
           <h2>Información de los puntos:</h2>
-          {points.map((point) => (
-            <div key={point.id}>
-              <p>Nombre: {point.name}</p>
-              <p>Latitude: {point.latitude}</p>
-              <p>Longitude: {point.longitude}</p>
+          <div className="panel-container">
+            <div className="container">
+              <div className="table-container">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>#&nbsp;&nbsp;</th>
+                      <th>Nombre&nbsp;&nbsp;</th>
+                      <th>Latitude&nbsp;&nbsp;</th>
+                      <th>Longitude&nbsp;&nbsp;</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {points.map((point, index) => (
+                      <tr key={point.id}>
+                        <td>{index + 1}&nbsp;&nbsp;</td>
+                        <td>{point.name}&nbsp;&nbsp;</td>
+                        <td>{point.latitude}&nbsp;&nbsp;</td>
+                        <td>{point.longitude}&nbsp;&nbsp;</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          ))}
+          </div>
         </div>
       ) : (
         <p>Cargando Points...</p>

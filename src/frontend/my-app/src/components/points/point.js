@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import './point.css';
 
 const PointRegister = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [longitude, setLongitude] = useState('');
   const [latitude, setLatitude] = useState('');
   const [comments, setComments] = useState('');
-  const [userId, setUserId]= useState('');
+  const [userId, setUserId] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,9 +44,14 @@ const PointRegister = () => {
     }
   };
 
+  const regresar = () => {
+    navigate('/dashboardAdmin');
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <h1>Registrar Punto de Recolección</h1>
         <div>
           <label htmlFor="name">Nombre:</label>
           <br />
@@ -79,31 +86,31 @@ const PointRegister = () => {
           />
         </div>
         <div>
-            <label htmlFor="comments">Comentarios:</label>
-            <br />
-            <input
-                type="text"
-                id="comments"
-                value={comments}
-                onChange={(e) => setComments(e.target.value)}
-                required
-            />
+          <label htmlFor="comments">Comentarios:</label>
+          <br />
+          <input
+            type="text"
+            id="comments"
+            value={comments}
+            onChange={(e) => setComments(e.target.value)}
+            required
+          />
         </div>
         <div>
-            <label htmlFor="userId">Id del usuario:</label>
-            <br />
-            <input
-                type="text"
-                id="userId"
-                value={userId}
-                onChange={(e) => setUserId(e.target.value)}
-                required
-            />
+          <label htmlFor="userId">Id del usuario:</label>
+          <br />
+          <input
+            type="text"
+            id="userId"
+            value={userId}
+            onChange={(e) => setUserId(e.target.value)}
+            required
+          />
         </div>
         <button type="submit">Registrar</button>
       </form>
 
-      <Link to="/login">Volver al inicio de sesión</Link>
+      <button className='regresar-button' onClick={regresar}>Regresar</button>
     </div>
   );
 };

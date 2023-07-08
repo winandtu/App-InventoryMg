@@ -8,6 +8,8 @@ import PointRegister from './components/points/point';
 import PointsOp from './components/operario/pointsOp';
 import PointRegisterOp from './components/points/pointRegisterOp';
 import DashboardAdmin from './components/admin/dashboardAdmin';
+import DashboardOperario from './components/operario/dashboardOp';
+
 import './App.css';
 
 
@@ -15,7 +17,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<RegisterUsr />} />
         <Route path="*" element={<Navigate to="/login" />} />
@@ -26,9 +28,7 @@ function App() {
         <Route path="/pointsOp" element={<PointsOp />} />
         <Route path="/pointRegisterOp" element={<PointRegisterOp />} />
         <Route path="/dashboardAdmin" element={<DashboardAdmin />} />
-        
-       
-
+        <Route path="/dashboardOP" element={<DashboardOperario />} />
 
       </Routes>
     </Router>

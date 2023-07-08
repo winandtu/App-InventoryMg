@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import './login.css';
 
 const RegisterUsr = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -21,7 +23,7 @@ const RegisterUsr = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, username, password, role:'operario' }),
+        body: JSON.stringify({ name, username, password, role: 'operario' }),
       });
 
       // Verificar si la respuesta fue exitosa
@@ -43,9 +45,14 @@ const RegisterUsr = () => {
     }
   };
 
+  const regresar = () => {
+    navigate('/dashboardAdmin');
+  };
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <h1>Registrar Operario</h1>
         <div>
           <label htmlFor="name">Nombre:</label>
           <br />
@@ -82,7 +89,7 @@ const RegisterUsr = () => {
         <button type="submit">Registrar</button>
       </form>
 
-      <Link to="/login">Volver al inicio de sesión</Link>
+      <button className='regresar-button' onClick={regresar}>Regresar</button>
     </div>
   );
 };

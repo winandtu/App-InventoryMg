@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const PointRegisterOp = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [longitude, setLongitude] = useState('');
   const [latitude, setLatitude] = useState('');
@@ -40,10 +41,14 @@ const PointRegisterOp = () => {
       console.error('Error en la solicitud:', error);
     }
   };
+  const regresar = () => {
+    navigate('/dashboardOp');
+  };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
+        <h1>Registrar punto</h1>
         <div>
           <label htmlFor="name">Nombre:</label>
           <br />
@@ -91,7 +96,7 @@ const PointRegisterOp = () => {
         <button type="submit">Registrar</button>
       </form>
 
-      <Link to="/login">Volver al inicio de sesión</Link>
+      <button className='regresar-button' onClick={regresar}>Regresar</button>
     </div>
   );
 };

@@ -14,7 +14,7 @@ exports.authenticateUser = (req, res, next) => {
       id: decodedToken.id,
       role: decodedToken.role, // Asegúrate de tener el rol del usuario en el token decodificado
     };
-    console.log('middleware',req.user); // Agrega esta línea para verificar req.user
+    console.log('middleware', req.user); // Agrega esta línea para verificar req.user
 
     // Continúa con el siguiente middleware o controlador
     next();

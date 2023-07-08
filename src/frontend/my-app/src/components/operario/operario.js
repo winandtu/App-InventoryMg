@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import './operario.css'; // Importar el archivo CSS
+import PointsOp from './pointsOp';
 
 const Operario = () => {
   const [operario, setOperario] = useState(null);
@@ -36,19 +37,35 @@ const Operario = () => {
     <div>
       {operario ? (
         <div>
-          <h2>Información del operario:</h2>
-          <p>Nombre: {operario.name}</p>
-          <p>Username: {operario.username}</p>
-          <p>id: {operario.id}</p>
-          <Link to="/pointsOp">Puntos del operario</Link>
-          <Link to="/pointRegisterOp">Registrar Puntos</Link>
+          <h2>INFORMACIÓN</h2>
+          <div className="panel-container">
+            <div className="panel-left">
+              <div className="container">
+                <h1>Mis datos &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</h1>
+                <div className='datos-box'>
+
+                  <h4>Nombre: {operario.name}</h4>
+
+                  <h4>Username: {operario.username}</h4>
+
+                  <h4>Id: {operario.id}</h4>
+                </div>
+              </div>
+            </div>
+            <div className="panel-right">
+              <div className="container">
+                <h1>Mis puntos &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;</h1>
+                <PointsOp />
+              </div>
+            </div>
+          </div>
         </div>
-        
       ) : (
         <p>Cargando operario...</p>
       )}
     </div>
   );
+
 };
 
 export default Operario;
