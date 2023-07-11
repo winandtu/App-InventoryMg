@@ -16,7 +16,7 @@ npm --version
 ```
 npm install
 ```
-- Ejecutar la aplicación:
+## Ejecutar la aplicación:
   
 - Conexión a la base de datos, ir a src/backend/config/:
 ```
