@@ -2,7 +2,7 @@
 ## Video de cómo funciona la aplicación: https://youtu.be/sDnYtA9YVmI
 
 
-##Para ejecutar la aplicación:
+## Para ejecutar la aplicación:
 
 - Node.js: Asegúrate de que el equipo tenga Node.js instalado. Puedes descargar e instalar la versión LTS más reciente de Node.js desde el sitio web oficial: https://nodejs.org
 Verifica si npm está instalado ejecutando el siguiente comando en la terminal:
