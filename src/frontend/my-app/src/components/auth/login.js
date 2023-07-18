@@ -103,7 +103,7 @@ function Login() {
         {error && <p className="error">{error}</p>}
       </div>
       <div className="map-box">
-        <Link to="/map">Map</Link>
+        <Link to="/mapUsr">Map</Link>
       </div>
     </div>
     </div>

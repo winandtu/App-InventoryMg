@@ -9,7 +9,8 @@ import PointsOp from './components/operario/pointsOp';
 import PointRegisterOp from './components/points/pointRegisterOp';
 import DashboardAdmin from './components/admin/dashboardAdmin';
 import DashboardOperario from './components/operario/dashboardOp';
-
+import MapPointCreator from './components/maps/mapPoint';
+import MapUser from './components/maps/mapUsr';
 import './App.css';
 
 
@@ -29,6 +30,8 @@ function App() {
         <Route path="/pointRegisterOp" element={<PointRegisterOp />} />
         <Route path="/dashboardAdmin" element={<DashboardAdmin />} />
         <Route path="/dashboardOP" element={<DashboardOperario />} />
+        <Route path="/mapPoint" element={<MapPointCreator />} />
+        <Route path="/mapUsr" element={<MapUser />} />
 
       </Routes>
     </Router>

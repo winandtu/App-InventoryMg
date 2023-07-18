@@ -20,7 +20,8 @@ function DashboardOperario() {
       <div className="sidebar">
         <ul className="menu">
           <li><Link to="/pointRegisterOp">Registrar Puntos de Recolección</Link></li>
-          <li><Link to="/map">Ver Mapa</Link></li>
+          <li><Link to="/mapUsr">Ver Mis Puntos</Link></li>
+          <li><Link to = "/mapPoint">Crear Punto en el Mapa</Link></li>
           <div className="sidebar-footer">
             <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>
           </div>
