@@ -20,6 +20,8 @@ function DashboardAdmin() {
         <ul className="menu">
           <li><Link to="/register">Registrar Operario</Link></li>
           <li><Link to="/point">Registrar Puntos de Recolección</Link></li>
+          <li><Link to="/mapPoint">Crear Punto en el Mapa</Link></li>
+          <li><Link to="/mapUsr">Ver mis Puntos</Link></li>
           <li><Link to="/map">Ver Mapa</Link></li>
           <div className="sidebar-footer">
             <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>

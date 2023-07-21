@@ -34,6 +34,28 @@ exports.getPointImages = async (req, res) => {
         res.status(500).json({ error: 'Error al obtener las imagenes' });
     }
 };
+//Controlador para obtener todas las imagenes de un punto
+exports.getImagesByPointId = async (req, res) => {
+    try {
+        //Obtiene el ID del punto de los parámetros de la ruta
+        const { pointId } = req.params;
+        //Busca todas las imagenes en la base de datos por el ID del punto
+        const pointImage = await Images.findAll({ where: { pointId } });
+        //Si se encuentran imagenes, devuelve una respuesta exitosa con las imagenes encontradas
+        if (pointImage.length > 0) {
+            res.status(200).json(pointImage);
+        }
+        else {
+            //Si no se encuentran imagenes, devuelve una respuesta de error
+            res.status(404).json({ error: 'No se encontraron imagenes para el punto especificado' });
+        }
+    }
+    catch (error) {
+        //Si ocurre un error, devuelve una respuesta de error
+        console.error(error);
+        res.status(500).json({ error: 'Error al obtener las imagenes' });
+    }
+};
 
 //Controlador para obtener una imagen por su ID
 exports.getPointImageById = async (req, res) => {
@@ -108,5 +130,29 @@ exports.deletePointImageById = async (req, res) => {
         //Si ocurre un error, devuelve una respuesta de error
         console.error(error);
         res.status(500).json({ error: 'Error al eliminar la imagen' });
+    }
+};
+
+
+// Controlador para borrar todas las imágenes de un punto
+exports.deleteImagesByPointId = async (req, res) => {
+    try {
+        // Obtiene el ID del punto de los parámetros de la ruta
+        const { pointId } = req.params;
+
+        // Busca y borra todas las imágenes en la base de datos por el ID del punto
+        const deletedImagesCount = await Images.destroy({ where: { pointId } });
+
+        if (deletedImagesCount > 0) {
+            // Si se borraron imágenes, devuelve una respuesta exitosa
+            res.status(200).json({ message: `${deletedImagesCount} imágenes borradas exitosamente` });
+        } else {
+            // Si no se encuentran imágenes para borrar, devuelve una respuesta de error
+            res.status(404).json({ error: 'No se encontraron imágenes para el punto especificado' });
+        }
+    } catch (error) {
+        // Si ocurre un error, devuelve una respuesta de error
+        console.error(error);
+        res.status(500).json({ error: 'Error al borrar las imágenes' });
     }
 };

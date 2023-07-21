@@ -9,6 +9,7 @@ const MapPointCreator = () => {
   const [map, setMap] = useState(null);
   const [name, setName] = useState('');
   const [comments, setComments] = useState('');
+  //const [imageUrl, setImageUrl] = useState('');
   const [mapPointCoordinates, setMapPointCoordinates] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const markerRef = useRef(null);
@@ -18,8 +19,7 @@ const MapPointCreator = () => {
     const longitude = lngLat.lng;
     const latitude = lngLat.lat;
 
-    // Guardar la longitud y latitud seleccionada
-    // en el estado del componente
+    // Guardar la longitud y latitud seleccionada en el estado del componente
     setMapPointCoordinates({ longitude, latitude });
 
     // Mostrar la ventana para crear el punto
@@ -43,6 +43,8 @@ const MapPointCreator = () => {
           alert('Punto registrado correctamente');
           setName('');
           setComments('');
+          //const pointId = response.data.id;
+          //await addPointImage(pointId);
         } else {
           alert('Error al registrar el punto');
           console.error('Error al crear el punto');
@@ -57,6 +59,32 @@ const MapPointCreator = () => {
     // Cerrar la ventana de creación del punto
     closePointCreationModal();
   };
+
+  /*const addPointImage = async (pointId) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (token) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+        const response = await axios.post('/images/create', {
+          pointId,
+          imageUrl,
+        });
+
+        if (response.status === 201) {
+          alert('Punto creado correctamente');
+          setImageUrl('');
+        } else {
+          alert('Error al agregar la imagen');
+          console.error('Error al agregar la imagen');
+        }
+      } else {
+        console.error('Token no encontrado');
+      }
+    } catch (error) {
+      console.error('Error en la solicitud:', error);
+    }
+  }; */
 
   const openPointCreationModal = () => {
     setShowModal(true);
@@ -104,10 +132,10 @@ const MapPointCreator = () => {
   useEffect(() => {
     if (map && mapPointCoordinates) {
       const markerElement = document.createElement('div');
-      markerElement.className = 'custom-marker';
-      markerElement.style.backgroundColor = 'blue';
-      markerElement.style.width = '15px';
-      markerElement.style.height = '15px';
+      markerElement.className = 'marker-creator';
+      //markerElement.style.backgroundColor = 'blue';
+      //markerElement.style.width = '15px';
+      //markerElement.style.height = '15px';
 
       // Crear el marcador y almacenar la referencia en el estado
       const marker = new mapboxgl.Marker(markerElement)

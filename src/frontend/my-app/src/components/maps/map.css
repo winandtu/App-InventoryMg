@@ -1,0 +1,30 @@
+.marker {
+    background-image: url("https://cdn2.iconfinder.com/data/icons/human-resources-filloutline/64/placeholder-maps_and_location-map_pointer-map_point-map_location_-512.png");
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+  }
+
+  .Mymarker {
+    background-image: url("https://cdn4.iconfinder.com/data/icons/business-pack-7/64/meeting-point-hr-human-resource-512.png");
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+  }
+
+  .marker-creator {
+    background-image: url("https://cdn1.iconfinder.com/data/icons/general-or-universal-set/64/location-pin-map-gps-place-point-navigation-direction-512.png");
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 50%;
+  }
+  

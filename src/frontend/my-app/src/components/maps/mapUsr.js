@@ -1,14 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import axios from 'axios';
+import './map.css';
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoid2luYW5kdHUiLCJhIjoiY2xqaTVqcWp4MDl0bTNncjRudThzNTFxeSJ9.bgiS1laMfDA3CShv0CEaCw';
 
 const MapUser = () => {
   const [map, setMap] = useState(null);
   const [selectedPoint, setSelectedPoint] = useState(null);
-  const markerRef = useRef(null);
+  //const markerRef = useRef(null);
+  const [markers, setMarkers] = useState([]);
 
   useEffect(() => {
     const initializeMap = () => {
@@ -47,18 +49,20 @@ const MapUser = () => {
               const { id, name, longitude, latitude, comments, userId } = point;
 
               const markerElement = document.createElement('div');
-              markerElement.className = 'custom-marker';
-              markerElement.style.backgroundColor = 'red';
-              markerElement.style.width = '15px';
-              markerElement.style.height = '15px';
+              markerElement.className = 'Mymarker';
+              //markerElement.style.backgroundColor = 'red';
+              //markerElement.style.width = '15px';
+              //markerElement.style.height = '15px';
 
               markerElement.addEventListener('click', () => {
                 showModal({ id, name, longitude, latitude, comments, userId });
               });
 
-              new mapboxgl.Marker(markerElement)
+              const marker = new mapboxgl.Marker(markerElement)
                 .setLngLat([longitude, latitude])
                 .addTo(map);
+
+              setMarkers((prevMarkers) => [...prevMarkers, marker]);
             });
           } else {
             console.log('Token no encontrado');
@@ -81,7 +85,6 @@ const MapUser = () => {
     setSelectedPoint(null);
   };
 
-
   const handleDeletePoint = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -91,11 +94,25 @@ const MapUser = () => {
         if (response.status === 200) {
           alert('Punto eliminado correctamente');
           closeModal();
-          ///markerRef.current.remove();////////////////////
-          // Eliminar el marcador del mapa
-    if (markerRef.current) {
-        markerRef.current.remove();
-      }
+
+          // Encuentra el marcador correspondiente al punto seleccionado y elimínalo del mapa
+          const markerToRemove = markers.find(
+            marker =>
+              marker.getLngLat().lng === selectedPoint.longitude &&
+              marker.getLngLat().lat === selectedPoint.latitude
+          );
+
+          if (markerToRemove) {
+            markerToRemove.remove();
+
+            // Actualiza el estado de los marcadores para eliminar el marcador eliminado
+            setMarkers(prevMarkers =>
+              prevMarkers.filter(marker =>
+                marker.getLngLat().lng !== selectedPoint.longitude ||
+                marker.getLngLat().lat !== selectedPoint.latitude
+              )
+            );
+          }
         } else {
           alert('Error al eliminar el punto');
         }
@@ -130,7 +147,7 @@ const MapUser = () => {
             <p>Comments: {selectedPoint.comments}</p>
             <p>User ID: {selectedPoint.userId}</p>
             <button onClick={handleDeletePoint}>Borrar</button>
-            <button onClick={closeModal}>Close</button>
+            <button onClick={closeModal}>Cerrar</button>
           </div>
         </div>
       )}
